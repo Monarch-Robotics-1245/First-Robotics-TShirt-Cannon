@@ -17,6 +17,9 @@ public final class Constants {
     public static final int MOTOR_LEFT_2_ID = 1;
     public static final int MOTOR_RIGHT_1_ID = 2;
     public static final int MOTOR_RIGHT_2_ID = 3;
+    public static final int LEFT_STICK_Y = 1;
+    public static final int RIGHT_STICK_Y = 5;
+    public static final double TANK_DRIVE_SENSITIVITY = .5;
 
     public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
