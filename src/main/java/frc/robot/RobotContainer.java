@@ -22,6 +22,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrainSubsystem = new DriveTrain();
   private final TankDrive tankDriveCommand = new TankDrive(driveTrainSubsystem);
+  private final Pnumatics pnumaticsSubsystem = new Pnumatics();
+  private final Cannon cannonCommand = new Cannon(pnumaticsSubsystem);
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -40,6 +42,7 @@ public class RobotContainer {
     // Configure the trigger bindings
 //    configureBindings();
     driveTrainSubsystem.setDefaultCommand(tankDriveCommand);
+    pnumaticsSubsystem.setDeafaultCommand(cannonCommand);
   }
 
   /**
