@@ -31,6 +31,9 @@ public class RobotContainer {
   public double getDriverRawAxis(int axis) {
     return m_driverController.getRawAxis(axis);
   }
+  public boolean getDriverButton(int button) {
+    return m_driverController.getHID().getRawButton(button);
+  }
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
