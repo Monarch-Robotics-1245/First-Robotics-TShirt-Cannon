@@ -27,7 +27,10 @@ public class Cannon extends Command {
   @Override
   public void execute() {
     if (Robot.m_robotContainer.getDriverButton(Constants.RELOAD_BUTTON) = true) {
-       =
+       Robot.setNextSolenoid(1);
+    }
+  	if (Robot.m_robotConatiner.getDriverButton(Constants.FIRE_BUTTON) = true) {
+		pnumatics.openSolenoid(Robot.getNextSolenoid());	
     }
   }
 
