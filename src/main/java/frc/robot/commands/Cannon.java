@@ -41,11 +41,7 @@ public class Cannon extends Command {
       cannon.setCannon(6);}
 
 
-    if (Robot.m_robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.m_robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.m_robotContainer.getManagerButton(Constants.READY_FIRE)) {
-      masterFire = true;
-    } else {
-      masterFire = false;
-    }
+    masterFire = Robot.m_robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.m_robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.m_robotContainer.getManagerButton(Constants.READY_FIRE);
     cannon.activateMaster(KEYS.SAFETY_KEY, masterFire);
   }
 
