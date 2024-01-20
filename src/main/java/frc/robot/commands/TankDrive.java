@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -27,20 +28,37 @@ public class TankDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Robot.m_robotContainer.getManagerButton(2)) {
-      double forwardVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_FORWARD);
-      double sideVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_SIDE);
+    boolean managerInControl;
+    boolean driverInControl;
 
+    double leftStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
+    double rightStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
+
+    double forwardVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_FORWARD);
+    double sideVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_SIDE);
+
+
+    if (Robot.m_robotContainer.getManagerButton(2)) {
       driveTrain.setLeftMotors(forwardVal + sideVal);
       driveTrain.setRightMotors(forwardVal - sideVal);
-    } else {
-      double leftStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
-      double rightStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
 
+      managerInControl = true;
+      driverInControl = false;
+    } else {
       driveTrain.setLeftMotors(leftStickY*Constants.TANK_DRIVE_SENSITIVITY);
       driveTrain.setRightMotors(rightStickY*Constants.TANK_DRIVE_SENSITIVITY);
+
+      managerInControl = false;
+      driverInControl = true;
     }
 
+    SmartDashboard.putBoolean("Manager", managerInControl);
+    SmartDashboard.putBoolean("Driver", driverInControl);
+    SmartDashboard.putNumber("Steer", sideVal);
+    SmartDashboard.putNumber("Drive", forwardVal);
+    SmartDashboard.putNumber("Left", leftStickY);
+    SmartDashboard.putNumber("Right", rightStickY);
+    SmartDashboard.putBoolean("OVERRIDE ACTIVE", Robot.m_robotContainer.getManagerButton(2));
   }
 
   // Called once the command ends or is interrupted.
