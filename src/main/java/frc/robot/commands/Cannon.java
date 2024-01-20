@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.KEYS;
 import frc.robot.Robot;
 
 public class Cannon extends Command {
@@ -42,7 +41,7 @@ public class Cannon extends Command {
 
 
     masterFire = Robot.m_robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.m_robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.m_robotContainer.getManagerButton(Constants.READY_FIRE);
-    cannon.activateMaster(KEYS.SAFETY_KEY, masterFire);
+    cannon.activateMaster(masterFire);
   }
 
   // Called once the command ends or is interrupted.

@@ -30,10 +30,8 @@ public class Cannon extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void activateMaster(int safetyKey, boolean set) {
-    if (safetyKey == 1245) {
-      MasterFire.set(set);
-    }
+  public void activateMaster(boolean set) {
+    MasterFire.set(set);
   }
 
   public void setCannon(int cannon) {
