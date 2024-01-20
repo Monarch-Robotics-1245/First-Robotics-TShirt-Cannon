@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Cannon;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,13 +23,16 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrainSubsystem = new DriveTrain();
   private final TankDrive tankDriveCommand = new TankDrive(driveTrainSubsystem);
-  private final Pnumatics pnumaticsSubsystem = new Pnumatics();
-  private final Cannon cannonCommand = new Cannon(pnumaticsSubsystem);
+  private final Cannon cannonSubsystem = new Cannon();
+  private final frc.robot.commands.Cannon cannonCommand = new frc.robot.commands.Cannon(cannonSubsystem);
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+          new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
+
+  private final CommandXboxController m_managerController =
+          new CommandXboxController(OperatorConstants.MANAGER_CONTROLLER_PORT);
 
   public double getDriverRawAxis(int axis) {
     return m_driverController.getRawAxis(axis);
@@ -36,13 +40,19 @@ public class RobotContainer {
   public boolean getDriverButton(int button) {
     return m_driverController.getHID().getRawButton(button);
   }
+  public double getManagerRawAxis(int axis) {
+    return m_managerController.getRawAxis(axis);
+  }
+  public boolean getManagerButton(int button) {
+    return m_managerController.getHID().getRawButton(button);
+  }
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
 //    configureBindings();
     driveTrainSubsystem.setDefaultCommand(tankDriveCommand);
-    pnumaticsSubsystem.setDeafaultCommand(cannonCommand);
+    cannonSubsystem.setDefaultCommand(cannonCommand);
   }
 
   /**

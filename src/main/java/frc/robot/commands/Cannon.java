@@ -6,17 +6,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.KEYS;
 import frc.robot.Robot;
-import frc.robot.subsystems.Pnumatics;
 
 public class Cannon extends Command {
   /** Creates a new TankDrive. */
-  private final Pnumatics pnumatics;
+  private final frc.robot.subsystems.Cannon cannon;
+  private boolean masterFire;
 
-  public Cannon(Pnumatics pnumatics) {
-    this.pnumatics = pnumatics;
+  public Cannon(frc.robot.subsystems.Cannon cannon) {
+    this.cannon = cannon;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(pnumatics);
+    addRequirements(cannon);
   }
 
   // Called when the command is initially scheduled.
@@ -26,18 +27,31 @@ public class Cannon extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Robot.m_robotContainer.getDriverButton(Constants.RELOAD_BUTTON) = true) {
-       Robot.setNextSolenoid(1);
+    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_ONE)) {
+      cannon.setCannon(1);}
+    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_TWO)) {
+      cannon.setCannon(2);}
+    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_THREE)) {
+      cannon.setCannon(3);}
+    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_FOUR)) {
+      cannon.setCannon(4);}
+    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_FIVE)) {
+      cannon.setCannon(5);}
+    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_SIX)) {
+      cannon.setCannon(6);}
+
+
+    if (Robot.m_robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.m_robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.m_robotContainer.getManagerButton(Constants.READY_FIRE)) {
+      masterFire = true;
+    } else {
+      masterFire = false;
     }
-  	if (Robot.m_robotConatiner.getDriverButton(Constants.FIRE_BUTTON) = true) {
-		pnumatics.openSolenoid(Robot.getNextSolenoid());	
-    }
+    cannon.activateMaster(KEYS.SAFETY_KEY, masterFire);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pnumatics.openSolenoid(0);
   }
 
   // Returns true when the command should end.

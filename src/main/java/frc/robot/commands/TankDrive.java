@@ -27,11 +27,20 @@ public class TankDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
-    double rightStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
+    if (Robot.m_robotContainer.getManagerButton(2)) {
+      double forwardVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_FORWARD);
+      double sideVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_SIDE);
 
-    driveTrain.setLeftMotors(leftStickY*Constants.TANK_DRIVE_SENSITIVITY);
-    driveTrain.setRightMotors(rightStickY*Constants.TANK_DRIVE_SENSITIVITY);
+      driveTrain.setLeftMotors(forwardVal + sideVal);
+      driveTrain.setRightMotors(forwardVal - sideVal);
+    } else {
+      double leftStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
+      double rightStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
+
+      driveTrain.setLeftMotors(leftStickY*Constants.TANK_DRIVE_SENSITIVITY);
+      driveTrain.setRightMotors(rightStickY*Constants.TANK_DRIVE_SENSITIVITY);
+    }
+
   }
 
   // Called once the command ends or is interrupted.
