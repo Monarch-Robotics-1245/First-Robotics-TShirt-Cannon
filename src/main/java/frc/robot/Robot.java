@@ -20,6 +20,9 @@ public class Robot extends TimedRobot {
 
   public static RobotContainer m_robotContainer;
 
+  public Robot() {
+  }
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -29,7 +32,10 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    CameraServer.startAutomaticCapture();
+    try {
+      CameraServer.startAutomaticCapture();
+    } catch(Exception ignored) {
+    }
   }
 
   /**
