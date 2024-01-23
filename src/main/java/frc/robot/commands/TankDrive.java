@@ -37,10 +37,12 @@ public class TankDrive extends Command {
     double forwardVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_FORWARD);
     double sideVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_SIDE);
 
+    double leftCommandManager = forwardVal + sideVal
+    double rightCommandManager = forwardVal - sideVal
 
     if (Robot.m_robotContainer.getManagerButton(2)) {
-      driveTrain.setLeftMotors(forwardVal + sideVal);
-      driveTrain.setRightMotors(forwardVal - sideVal);
+      driveTrain.setLeftMotors(leftCommandManager);
+      driveTrain.setRightMotors(-rightCommandManager);
 
       managerInControl = true;
       driverInControl = false;
