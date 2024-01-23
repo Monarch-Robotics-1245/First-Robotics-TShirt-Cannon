@@ -32,13 +32,21 @@ public class RobotContainer {
           new CommandGenericHID(OperatorConstants.MANAGER_CONTROLLER_PORT);
 
   public double getDriverRawAxis(int axis) {
-    return m_driverController.getRawAxis(axis);
+    if (abs(m_driverController.getRawAxis(axis)) > deadzone) {
+		return 0;
+    } else {
+		return m_driverController.getRawAxis(axis)
+    }
   }
   public boolean getDriverButton(int button) {
     return m_driverController.getHID().getRawButton(button);
   }
   public double getManagerRawAxis(int axis) {
-    return m_managerController.getRawAxis(axis);
+    if (abs(m_managerController.getRawAxis(axis)) > deadzone) {
+		return 0;
+    } else {
+		return m_managerController.getRawAxis(axis)
+    }
   }
   public boolean getManagerButton(int button) {
     return m_managerController.getHID().getRawButton(button);
