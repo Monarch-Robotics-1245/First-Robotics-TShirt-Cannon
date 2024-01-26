@@ -33,6 +33,7 @@ public final class Constants {
     public static final int MANAGER_SIDE = 1;
     public static final int PCM_ONE = 9;
     public static final int PCM_TWO = 10;
+    public static final double DEADZONE = .05;
 
 
     public static class OperatorConstants {
