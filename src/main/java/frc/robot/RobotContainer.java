@@ -13,6 +13,8 @@ import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Cannon;
 
+import static java.lang.Math.abs;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -32,13 +34,21 @@ public class RobotContainer {
           new CommandGenericHID(OperatorConstants.MANAGER_CONTROLLER_PORT);
 
   public double getDriverRawAxis(int axis) {
-    return driverController.getRawAxis(axis);
+    if (abs(driverController.getRawAxis(axis)) > Constants.DEADZONE) {
+		return 0;
+    } else {
+		return driverController.getRawAxis(axis)
+    }
   }
   public boolean getDriverButton(int button) {
     return driverController.getHID().getRawButton(button);
   }
   public double getManagerRawAxis(int axis) {
-    return managerController.getRawAxis(axis);
+    if (abs(managerController.getRawAxis(axis)) > Constants.DEADZONE) {
+		return 0;
+    } else {
+		return managerController.getRawAxis(axis)
+    }
   }
   public boolean getManagerButton(int button) {
     return managerController.getHID().getRawButton(button);
