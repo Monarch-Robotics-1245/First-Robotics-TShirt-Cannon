@@ -37,7 +37,7 @@ public class RobotContainer {
     if (abs(driverController.getRawAxis(axis)) > Constants.DEADZONE) {
 		return 0;
     } else {
-		return driverController.getRawAxis(axis)
+		return driverController.getRawAxis(axis);
     }
   }
   public boolean getDriverButton(int button) {
@@ -47,7 +47,7 @@ public class RobotContainer {
     if (abs(managerController.getRawAxis(axis)) > Constants.DEADZONE) {
 		return 0;
     } else {
-		return managerController.getRawAxis(axis)
+		return managerController.getRawAxis(axis);
     }
   }
   public boolean getManagerButton(int button) {
