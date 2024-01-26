@@ -12,7 +12,6 @@ import frc.robot.Robot;
 public class Cannon extends Command {
   /** Creates a new TankDrive. */
   private final frc.robot.subsystems.Cannon cannon;
-  private boolean masterFire;
 
   public Cannon(frc.robot.subsystems.Cannon cannon) {
     this.cannon = cannon;
@@ -28,38 +27,38 @@ public class Cannon extends Command {
   @Override
   public void execute() {
     int selectedCannon = 0;
-    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_ONE)) {
+    if (Robot.robotContainer.getManagerButton(Constants.LOAD_ONE)) {
       cannon.setCannon(1);
       selectedCannon = 1;
     }
-    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_TWO)) {
+    if (Robot.robotContainer.getManagerButton(Constants.LOAD_TWO)) {
       cannon.setCannon(2);
       selectedCannon = 2;
     }
-    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_THREE)) {
+    if (Robot.robotContainer.getManagerButton(Constants.LOAD_THREE)) {
       cannon.setCannon(3);
       selectedCannon = 3;
     }
-    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_FOUR)) {
+    if (Robot.robotContainer.getManagerButton(Constants.LOAD_FOUR)) {
       cannon.setCannon(4);
       selectedCannon = 4;
     }
-    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_FIVE)) {
+    if (Robot.robotContainer.getManagerButton(Constants.LOAD_FIVE)) {
       cannon.setCannon(5);
       selectedCannon = 5;
     }
-    if (Robot.m_robotContainer.getManagerButton(Constants.LOAD_SIX)) {
+    if (Robot.robotContainer.getManagerButton(Constants.LOAD_SIX)) {
       cannon.setCannon(6);
       selectedCannon = 6;
     }
 
 
-    masterFire = Robot.m_robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.m_robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.m_robotContainer.getManagerButton(Constants.READY_FIRE);
+    boolean masterFire = Robot.robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.robotContainer.getManagerButton(Constants.READY_FIRE);
     cannon.activateMaster(masterFire);
 
     SmartDashboard.putNumber("Selected Cannon", selectedCannon);
     SmartDashboard.putBoolean("Master Open", masterFire);
-    SmartDashboard.putBoolean("Ready Fire", Robot.m_robotContainer.getManagerButton(Constants.READY_FIRE));
+    SmartDashboard.putBoolean("Ready Fire", Robot.robotContainer.getManagerButton(Constants.READY_FIRE));
   }
 
   // Called once the command ends or is interrupted.

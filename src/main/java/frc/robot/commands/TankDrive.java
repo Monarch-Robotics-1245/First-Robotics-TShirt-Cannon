@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 public class TankDrive extends Command {
@@ -31,14 +30,14 @@ public class TankDrive extends Command {
     boolean managerInControl;
     boolean driverInControl;
 
-    double leftStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
-    double rightStickY = Robot.m_robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
+    double leftStickY = Robot.robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
+    double rightStickY = Robot.robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
 
-    double forwardVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_FORWARD);
-    double sideVal = Robot.m_robotContainer.getManagerRawAxis(Constants.MANAGER_SIDE);
+    double forwardVal = Robot.robotContainer.getManagerRawAxis(Constants.MANAGER_FORWARD);
+    double sideVal = Robot.robotContainer.getManagerRawAxis(Constants.MANAGER_SIDE);
 
 
-    if (Robot.m_robotContainer.getManagerButton(2)) {
+    if (Robot.robotContainer.getManagerButton(2)) {
       driveTrain.setLeftMotors(forwardVal + sideVal);
       driveTrain.setRightMotors(forwardVal - sideVal);
 
@@ -58,7 +57,7 @@ public class TankDrive extends Command {
     SmartDashboard.putNumber("Drive", forwardVal);
     SmartDashboard.putNumber("Left", leftStickY);
     SmartDashboard.putNumber("Right", rightStickY);
-    SmartDashboard.putBoolean("OVERRIDE ACTIVE", Robot.m_robotContainer.getManagerButton(2));
+    SmartDashboard.putBoolean("OVERRIDE ACTIVE", Robot.robotContainer.getManagerButton(2));
   }
 
   // Called once the command ends or is interrupted.

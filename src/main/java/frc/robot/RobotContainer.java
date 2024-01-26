@@ -25,23 +25,23 @@ public class RobotContainer {
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
+  private final CommandXboxController driverController =
           new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
 
-  private final CommandGenericHID m_managerController =
+  private final CommandGenericHID managerController =
           new CommandGenericHID(OperatorConstants.MANAGER_CONTROLLER_PORT);
 
   public double getDriverRawAxis(int axis) {
-    return m_driverController.getRawAxis(axis);
+    return driverController.getRawAxis(axis);
   }
   public boolean getDriverButton(int button) {
-    return m_driverController.getHID().getRawButton(button);
+    return driverController.getHID().getRawButton(button);
   }
   public double getManagerRawAxis(int axis) {
-    return m_managerController.getRawAxis(axis);
+    return managerController.getRawAxis(axis);
   }
   public boolean getManagerButton(int button) {
-    return m_managerController.getHID().getRawButton(button);
+    return managerController.getHID().getRawButton(button);
   }
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -62,7 +62,7 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-//    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+//    driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 //  }
 
   /**
