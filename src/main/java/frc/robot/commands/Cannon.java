@@ -28,33 +28,27 @@ public class Cannon extends Command {
   public void execute() {
     int selectedCannon = 0;
     if (Robot.robotContainer.getManagerButton(Constants.LOAD_ONE)) {
-      cannon.setCannon(1);
       selectedCannon = 1;
     }
     if (Robot.robotContainer.getManagerButton(Constants.LOAD_TWO)) {
-      cannon.setCannon(2);
       selectedCannon = 2;
     }
     if (Robot.robotContainer.getManagerButton(Constants.LOAD_THREE)) {
-      cannon.setCannon(3);
       selectedCannon = 3;
     }
     if (Robot.robotContainer.getManagerButton(Constants.LOAD_FOUR)) {
-      cannon.setCannon(4);
       selectedCannon = 4;
     }
     if (Robot.robotContainer.getManagerButton(Constants.LOAD_FIVE)) {
-      cannon.setCannon(5);
       selectedCannon = 5;
     }
     if (Robot.robotContainer.getManagerButton(Constants.LOAD_SIX)) {
-      cannon.setCannon(6);
       selectedCannon = 6;
     }
 
 
     boolean masterFire = Robot.robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.robotContainer.getManagerButton(Constants.READY_FIRE);
-    cannon.activateMaster(masterFire);
+    cannon.activateMaster(masterFire, selectedCannon);
 
     SmartDashboard.putNumber("Selected Cannon", selectedCannon);
     SmartDashboard.putBoolean("Master Open", masterFire);

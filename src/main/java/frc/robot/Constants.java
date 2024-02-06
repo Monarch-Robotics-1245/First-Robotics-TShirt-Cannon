@@ -31,8 +31,7 @@ public final class Constants {
     public static final int LOAD_SIX = 12;
     public static final int MANAGER_FORWARD = 0;
     public static final int MANAGER_SIDE = 1;
-    public static final int PCM_ONE = 9;
-    public static final int PCM_TWO = 10;
+    public static final int PCM = 9;
     public static final double DEADZONE = .05;
 
 
