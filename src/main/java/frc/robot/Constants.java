@@ -33,6 +33,12 @@ public final class Constants {
     public static final int MANAGER_SIDE = 1;
     public static final int PCM = 9;
     public static final double DEADZONE = .05;
+    public static final int S_ONE_F = 1;
+    public static final int S_ONE_R = 2;
+    public static final int S_TWO_F = 3;
+    public static final int S_TWO_R = 4;
+    public static final int S_THREE_F = 5;
+    public static final int S_THREE_R = 6;
 
 
     public static class OperatorConstants {

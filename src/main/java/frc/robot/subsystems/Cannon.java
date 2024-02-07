@@ -28,32 +28,32 @@ public class Cannon extends SubsystemBase {
 
   public void activateMaster(boolean active, int cannon) {
     if (active) {
-      if (cannon == 1) {
+      if (cannon == Constants.S_ONE_F) {
         SEL_1.set(kForward);
         SEL_2.set(kOff);
         SEL_3.set(kOff);
       }
-      if (cannon == 2) {
+      if (cannon == Constants.S_ONE_R) {
         SEL_1.set(kReverse);
         SEL_2.set(kOff);
         SEL_3.set(kOff);
       }
-      if (cannon == 3) {
+      if (cannon == Constants.S_TWO_F) {
         SEL_1.set(kOff);
         SEL_2.set(kForward);
         SEL_3.set(kOff);
       }
-      if (cannon == 4) {
+      if (cannon == Constants.S_TWO_R) {
         SEL_1.set(kOff);
         SEL_2.set(kReverse);
         SEL_3.set(kOff);
       }
-      if (cannon == 5) {
+      if (cannon == Constants.S_THREE_F) {
         SEL_1.set(kOff);
         SEL_2.set(kOff);
         SEL_3.set(kForward);
       }
-      if (cannon == 6) {
+      if (cannon == Constants.S_THREE_R) {
         SEL_1.set(kOff);
         SEL_2.set(kOff);
         SEL_3.set(kReverse);
