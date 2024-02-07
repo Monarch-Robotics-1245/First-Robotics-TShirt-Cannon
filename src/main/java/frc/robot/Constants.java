@@ -39,8 +39,6 @@ public final class Constants {
     public static final int S_TWO_R = 4;
     public static final int S_THREE_F = 5;
     public static final int S_THREE_R = 6;
-
-
     public static class OperatorConstants {
         public static final int DRIVER_CONTROLLER_PORT = 1;
         public static final int MANAGER_CONTROLLER_PORT = 0;

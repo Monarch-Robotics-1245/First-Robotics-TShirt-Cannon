@@ -29,20 +29,15 @@ public class Cannon extends Command {
     int selectedCannon = 0;
     if (Robot.robotContainer.getManagerButton(Constants.LOAD_ONE)) {
       selectedCannon = 1;
-    }
-    if (Robot.robotContainer.getManagerButton(Constants.LOAD_TWO)) {
+    } else if (Robot.robotContainer.getManagerButton(Constants.LOAD_TWO)) {
       selectedCannon = 2;
-    }
-    if (Robot.robotContainer.getManagerButton(Constants.LOAD_THREE)) {
+    } else if (Robot.robotContainer.getManagerButton(Constants.LOAD_THREE)) {
       selectedCannon = 3;
-    }
-    if (Robot.robotContainer.getManagerButton(Constants.LOAD_FOUR)) {
+    } else if (Robot.robotContainer.getManagerButton(Constants.LOAD_FOUR)) {
       selectedCannon = 4;
-    }
-    if (Robot.robotContainer.getManagerButton(Constants.LOAD_FIVE)) {
+    } else if (Robot.robotContainer.getManagerButton(Constants.LOAD_FIVE)) {
       selectedCannon = 5;
-    }
-    if (Robot.robotContainer.getManagerButton(Constants.LOAD_SIX)) {
+    } else if (Robot.robotContainer.getManagerButton(Constants.LOAD_SIX)) {
       selectedCannon = 6;
     }
 
@@ -50,7 +45,9 @@ public class Cannon extends Command {
     boolean masterFire = Robot.robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.robotContainer.getDriverButton(Constants.FIRE_TWO) && Robot.robotContainer.getManagerButton(Constants.READY_FIRE);
     cannon.activateMaster(masterFire, selectedCannon);
 
-    SmartDashboard.putNumber("Selected Cannon", selectedCannon);
+    if (selectedCannon!= 0) {
+      SmartDashboard.putNumber("Selected Cannon", selectedCannon);
+    }
     SmartDashboard.putBoolean("Master Open", masterFire);
     SmartDashboard.putBoolean("Ready Fire", Robot.robotContainer.getManagerButton(Constants.READY_FIRE));
   }
