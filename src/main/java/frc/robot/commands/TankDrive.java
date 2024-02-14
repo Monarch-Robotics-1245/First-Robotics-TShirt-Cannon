@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -27,6 +29,9 @@ public class TankDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    String inControl = "None";
+    ShuffleboardTab driveTab = Shuffleboard.getTab("Drive");
+
     boolean managerInControl;
     boolean driverInControl;
 
@@ -53,13 +58,29 @@ public class TankDrive extends Command {
       driverInControl = true;
     }
 
-    SmartDashboard.putBoolean("Manager", managerInControl);
-    SmartDashboard.putBoolean("Driver", driverInControl);
-    SmartDashboard.putNumber("Steer", sideVal);
-    SmartDashboard.putNumber("Drive", forwardVal);
-    SmartDashboard.putNumber("Left", leftStickY);
-    SmartDashboard.putNumber("Right", rightStickY);
-    SmartDashboard.putBoolean("OVERRIDE ACTIVE", Robot.robotContainer.getManagerButton(2));
+    if (managerInControl) {
+      inControl = "Manager";
+    } else if (driverInControl) {
+      inControl = "Driver";
+    }
+
+
+    driveTab.add("Control", inControl);
+
+    driveTab.add("Steer", sideVal);
+    driveTab.add("Drive", forwardVal);
+    driveTab.add("Left", leftStickY);
+    driveTab.add("Right", rightStickY);
+
+    driveTab.add("OVERRIDE ACTIVE", Robot.robotContainer.getManagerButton(2));
+
+    //SmartDashboard.putBoolean("Manager", managerInControl);
+    //SmartDashboard.putBoolean("Driver", driverInControl);
+    //SmartDashboard.putNumber("Steer", sideVal);
+    //SmartDashboard.putNumber("Drive", forwardVal);
+    //SmartDashboard.putNumber("Left", leftStickY);
+    //SmartDashboard.putNumber("Right", rightStickY);
+    //SmartDashboard.putBoolean("OVERRIDE ACTIVE", Robot.robotContainer.getManagerButton(2));
   }
 
   // Called once the command ends or is interrupted.
