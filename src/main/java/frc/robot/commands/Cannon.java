@@ -8,7 +8,6 @@ import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -22,8 +21,8 @@ public class Cannon extends Command {
   ShuffleboardTab robotTab = Shuffleboard.getTab("Robot");
   ShuffleboardTab setupTab = Shuffleboard.getTab("Setup");
 
-  private GenericEntry firePin = setupTab.add("Fire Pin", 0).withSize(2,1).withPosition(5,2).withWidget(BuiltInWidgets.kTextView).getEntry();
-  private GenericEntry enableCannons = setupTab.add("Enable Cannons", false).withSize(2,1).withPosition(5,3).withWidget(BuiltInWidgets.kToggleButton).getEntry();
+  private final GenericEntry firePin = setupTab.add("Fire Pin", 0).withSize(2,1).withPosition(5,2).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private final GenericEntry enableCannons = setupTab.add("Enable Cannons", false).withSize(2,1).withPosition(5,3).withWidget(BuiltInWidgets.kToggleButton).getEntry();
 
   private boolean CANNON_ONE_COMMAND = false;
   private boolean CANNON_TWO_COMMAND = false;
