@@ -19,10 +19,7 @@ public final class Constants {
     public static final int MOTOR_RIGHT_2_ID = 1;
     public static final int LEFT_STICK_Y = 1;
     public static final int RIGHT_STICK_Y = 5;
-    public static final double TANK_DRIVE_SENSITIVITY = .5;
     public static final int READY_FIRE = 1;
-    public static final int FIRE_ONE = 5;
-    public static final int FIRE_TWO = 6;
     public static final int LOAD_ONE = 7;
     public static final int LOAD_TWO = 9;
     public static final int LOAD_THREE = 11;
@@ -31,7 +28,6 @@ public final class Constants {
     public static final int LOAD_SIX = 12;
     public static final int MANAGER_FORWARD = 0;
     public static final int MANAGER_SIDE = 1;
-    public static final int COMP_PCM = 10;
     public static final int CANNON_PCM = 9;
     public static final double DEADZONE = .05;
     public static final int CANNON_ID_ONE = 1;
