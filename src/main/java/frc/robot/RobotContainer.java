@@ -40,7 +40,7 @@ public class RobotContainer {
           new CommandGenericHID(OperatorConstants.MANAGER_CONTROLLER_PORT);
 
   public double getDriverRawAxis(int axis) {
-    if (abs(driverController.getRawAxis(axis)) > Constants.DEADZONE) {
+    if (abs(driverController.getRawAxis(axis)) < Constants.DEADZONE) {
 		return 0;
     } else {
 		return driverController.getRawAxis(axis);
@@ -50,7 +50,7 @@ public class RobotContainer {
     return driverController.getHID().getRawButton(button);
   }
   public double getManagerRawAxis(int axis) {
-    if (abs(managerController.getRawAxis(axis)) > Constants.DEADZONE) {
+    if (abs(managerController.getRawAxis(axis)) < Constants.DEADZONE) {
 		return 0;
     } else {
 		return managerController.getRawAxis(axis);
