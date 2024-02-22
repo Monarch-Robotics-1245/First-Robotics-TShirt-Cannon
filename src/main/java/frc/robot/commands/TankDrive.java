@@ -4,15 +4,25 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
 public class TankDrive extends Command {
+  ShuffleboardTab robotTab = Shuffleboard.getTab("Robot");
+  ShuffleboardTab setupTab = Shuffleboard.getTab("Setup");
+  private GenericEntry AllisonMode = setupTab.add("Allison Mode", false).withSize(1,1).withPosition(6,5).getEntry();
+  private GenericEntry GuestMode = setupTab.add("Allison Mode", false).withSize(1,1).withPosition(6,4).getEntry();
+  private GenericEntry DefaultMode = setupTab.add("Allison Mode", false).withSize(1,1).withPosition(5,4).getEntry();
+  private GenericEntry SportMode = setupTab.add("Allison Mode", false).withSize(1,1).withPosition(5,5).getEntry();
+
   /** Creates a new TankDrive. */
   private final DriveTrain driveTrain;
 
@@ -29,11 +39,27 @@ public class TankDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    String inControl = "None";
-    ShuffleboardTab driveTab = Shuffleboard.getTab("Drive");
 
-    boolean managerInControl;
-    boolean driverInControl;
+
+    boolean modeAllison = AllisonMode.getBoolean(false);
+    boolean modeGuest = GuestMode.getBoolean(false);
+    boolean modeDefault = DefaultMode.getBoolean(false);
+    boolean modeSport = SportMode.getBoolean(false);
+
+    double speedMultiplier = 0;
+
+    if (modeAllison) {
+      speedMultiplier = Constants.MODE_ALLISON_SPEED;
+    } else if (modeGuest) {
+      speedMultiplier = Constants.MODE_GUEST_SPEED;
+    } else if (modeDefault) {
+      speedMultiplier = Constants.MODE_NORMAL_SPEED;
+    } else if (modeSport) {
+      speedMultiplier = Constants.MODE_SPORT_SPEED;
+    }
+
+    boolean OVERRIDE_ACTIVE;
+    boolean DriverInControl;
 
     double leftStickY = Robot.robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
     double rightStickY = Robot.robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
@@ -47,40 +73,16 @@ public class TankDrive extends Command {
     if (Robot.robotContainer.getManagerButton(2)) {
       driveTrain.setLeftMotors(leftCommandManager);
       driveTrain.setRightMotors(-rightCommandManager);
-
-      managerInControl = true;
-      driverInControl = false;
+      OVERRIDE_ACTIVE = true;
+      DriverInControl = false;
     } else {
-      driveTrain.setLeftMotors(leftStickY*Constants.TANK_DRIVE_SENSITIVITY);
-      driveTrain.setRightMotors(rightStickY*Constants.TANK_DRIVE_SENSITIVITY);
-
-      managerInControl = false;
-      driverInControl = true;
+      driveTrain.setLeftMotors(leftStickY*speedMultiplier*Constants.SPEED_REVERSE);
+      driveTrain.setRightMotors(rightStickY*speedMultiplier*Constants.SPEED_REVERSE);
+      DriverInControl = true;
+      OVERRIDE_ACTIVE = false;
     }
-
-    if (managerInControl) {
-      inControl = "Manager";
-    } else if (driverInControl) {
-      inControl = "Driver";
-    }
-
-
-    driveTab.add("Control", inControl);
-
-    driveTab.add("Steer", sideVal);
-    driveTab.add("Drive", forwardVal);
-    driveTab.add("Left", leftStickY);
-    driveTab.add("Right", rightStickY);
-
-    driveTab.add("OVERRIDE ACTIVE", Robot.robotContainer.getManagerButton(2));
-
-    //SmartDashboard.putBoolean("Manager", managerInControl);
-    //SmartDashboard.putBoolean("Driver", driverInControl);
-    //SmartDashboard.putNumber("Steer", sideVal);
-    //SmartDashboard.putNumber("Drive", forwardVal);
-    //SmartDashboard.putNumber("Left", leftStickY);
-    //SmartDashboard.putNumber("Right", rightStickY);
-    //SmartDashboard.putBoolean("OVERRIDE ACTIVE", Robot.robotContainer.getManagerButton(2));
+    robotTab.add("Driver In Control", DriverInControl).withSize(2,1).withPosition(3,1).withWidget(BuiltInWidgets.kBooleanBox);
+    robotTab.add("CONTROL OVERRIDE", OVERRIDE_ACTIVE).withSize(3,1).withPosition(6,0).withWidget(BuiltInWidgets.kBooleanBox);
   }
 
   // Called once the command ends or is interrupted.

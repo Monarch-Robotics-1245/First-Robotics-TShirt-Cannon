@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Cannon extends SubsystemBase {
   /** Creates a new DriveTrain. */
 
-  private final Solenoid CANNON_ONE = new Solenoid(Constants.PCM, PneumaticsModuleType.CTREPCM, 1);
-  private final Solenoid CANNON_TWO = new Solenoid(Constants.PCM, PneumaticsModuleType.CTREPCM, 2);
-  private final Solenoid CANNON_THREE = new Solenoid(Constants.PCM, PneumaticsModuleType.CTREPCM, 3);
-  private final Solenoid CANNON_FOUR = new Solenoid(Constants.PCM, PneumaticsModuleType.CTREPCM, 4);
-  private final Solenoid CANNON_FIVE = new Solenoid(Constants.PCM, PneumaticsModuleType.CTREPCM, 5);
-  private final Solenoid CANNON_SIX = new Solenoid(Constants.PCM, PneumaticsModuleType.CTREPCM, 6);
+  private final Solenoid CANNON_ONE = new Solenoid(Constants.CANNON_PCM, PneumaticsModuleType.CTREPCM, Constants.CANNON_CHANNEL_ONE);
+  private final Solenoid CANNON_TWO = new Solenoid(Constants.CANNON_PCM, PneumaticsModuleType.CTREPCM, Constants.CANNON_CHANNEL_TWO);
+  private final Solenoid CANNON_THREE = new Solenoid(Constants.CANNON_PCM, PneumaticsModuleType.CTREPCM, Constants.CANNON_CHANNEL_THREE);
+  private final Solenoid CANNON_FOUR = new Solenoid(Constants.CANNON_PCM, PneumaticsModuleType.CTREPCM, Constants.CANNON_CHANNEL_FOUR);
+  private final Solenoid CANNON_FIVE = new Solenoid(Constants.CANNON_PCM, PneumaticsModuleType.CTREPCM, Constants.CANNON_CHANNEL_FIVE);
+  private final Solenoid CANNON_SIX = new Solenoid(Constants.CANNON_PCM, PneumaticsModuleType.CTREPCM, Constants.CANNON_CHANNEL_SIX);
 
   public Cannon() {
 

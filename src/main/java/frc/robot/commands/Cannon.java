@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,22 +13,36 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
+import java.util.Objects;
+
 public class Cannon extends Command {
   /** Creates a new TankDrive. */
   private final frc.robot.subsystems.Cannon cannon;
 
-  ShuffleboardTab tab = Shuffleboard.getTab("Cannons");
-  GenericEntry CANNON_ONE_SET = tab.add("Cannon 1", false).getEntry();
-  GenericEntry CANNON_TWO_SET = tab.add("Cannon 2", false).getEntry();
-  GenericEntry CANNON_THREE_SET = tab.add("Cannon 3", false).getEntry();
-  GenericEntry CANNON_FOUR_SET = tab.add("Cannon 4", false).getEntry();
-  GenericEntry CANNON_FIVE_SET = tab.add("Cannon 5", false).getEntry();
-  GenericEntry CANNON_SIX_SET = tab.add("Cannon 6", false).getEntry();
+  ShuffleboardTab robotTab = Shuffleboard.getTab("Robot");
+  ShuffleboardTab setupTab = Shuffleboard.getTab("Setup");
 
-  public Cannon(frc.robot.subsystems.Cannon cannon) {
+  private GenericEntry firePin = setupTab.add("Fire Pin", 0).withSize(2,1).withPosition(5,2).withWidget(BuiltInWidgets.kTextView).getEntry();
+  private GenericEntry enableCannons = setupTab.add("Enable Cannons", false).withSize(2,1).withPosition(5,3).withWidget(BuiltInWidgets.kToggleButton).getEntry();
+
+  private boolean CANNON_ONE_COMMAND = false;
+  private boolean CANNON_TWO_COMMAND = false;
+  private boolean CANNON_THREE_COMMAND = false;
+  private boolean CANNON_FOUR_COMMAND = false;
+  private boolean CANNON_FIVE_COMMAND = false;
+  private boolean CANNON_SIX_COMMAND = false;
+
+
+  public Cannon(frc.robot.subsystems.Cannon cannon, boolean cannonOne, boolean cannonTwo, boolean cannonThree, boolean cannonFour, boolean cannonFive, boolean cannonSix) {
     this.cannon = cannon;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(cannon);
+     CANNON_ONE_COMMAND = cannonOne;
+     CANNON_TWO_COMMAND = cannonTwo;
+     CANNON_THREE_COMMAND = cannonThree;
+     CANNON_FOUR_COMMAND = cannonFour;
+     CANNON_FIVE_COMMAND = cannonFive;
+     CANNON_SIX_COMMAND = cannonSix;
   }
 
   // Called when the command is initially scheduled.
@@ -37,15 +52,24 @@ public class Cannon extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean CANNON_ONE_COMMAND = CANNON_ONE_SET.getBoolean(false);
-    boolean CANNON_TWO_COMMAND = CANNON_TWO_SET.getBoolean(false);
-    boolean CANNON_THREE_COMMAND = CANNON_THREE_SET.getBoolean(false);
-    boolean CANNON_FOUR_COMMAND = CANNON_FOUR_SET.getBoolean(false);
-    boolean CANNON_FIVE_COMMAND = CANNON_FIVE_SET.getBoolean(false);
-    boolean CANNON_SIX_COMMAND = CANNON_SIX_SET.getBoolean(false);
-    boolean masterFire = (Robot.robotContainer.getManagerButton(Constants.READY_FIRE) && Robot.robotContainer.getDriverButton(Constants.FIRE_ONE) && Robot.robotContainer.getDriverButton(Constants.FIRE_TWO));
+    boolean masterFire = Robot.robotContainer.getManagerButton(Constants.READY_FIRE);
+    boolean readyFire = false;
 
-    if (masterFire == true) {
+    String RobotPin = firePin.getString("0000");
+    boolean cannonsEnabled = enableCannons.getBoolean(false);
+
+    if (Objects.equals(RobotPin, Constants.PIN) && cannonsEnabled) {
+      readyFire = true;
+    }
+
+    robotTab.add("Cannon 1", CANNON_ONE_COMMAND).withSize(1,1).withPosition(0,0).withWidget(BuiltInWidgets.kBooleanBox);
+    robotTab.add("Cannon 2", CANNON_TWO_COMMAND).withSize(1,1).withPosition(1,0).withWidget(BuiltInWidgets.kBooleanBox);
+    robotTab.add("Cannon 3", CANNON_THREE_COMMAND).withSize(1,1).withPosition(2,0).withWidget(BuiltInWidgets.kBooleanBox);
+    robotTab.add("Cannon 4", CANNON_FOUR_COMMAND).withSize(1,1).withPosition(3,0).withWidget(BuiltInWidgets.kBooleanBox);
+    robotTab.add("Cannon 5", CANNON_FIVE_COMMAND).withSize(1,1).withPosition(4,0).withWidget(BuiltInWidgets.kBooleanBox);
+    robotTab.add("Cannon 6", CANNON_SIX_COMMAND).withSize(1,1).withPosition(5,0).withWidget(BuiltInWidgets.kBooleanBox);
+
+    if (masterFire && readyFire) {
       cannon.activateCannon(CANNON_ONE_COMMAND, Constants.CANNON_ID_ONE);
       cannon.activateCannon(CANNON_TWO_COMMAND, Constants.CANNON_ID_TWO);
       cannon.activateCannon(CANNON_THREE_COMMAND, Constants.CANNON_ID_THREE);
@@ -56,11 +80,8 @@ public class Cannon extends Command {
       cannon.disarmCannons();
     }
 
-    tab.add("Master Fire", masterFire);
-    tab.add("Ready Fire", Robot.robotContainer.getManagerButton(Constants.READY_FIRE));
-
-    //SmartDashboard.putBoolean("Master Open", masterFire);
-    //SmartDashboard.putBoolean("Ready Fire", Robot.robotContainer.getManagerButton(Constants.READY_FIRE));
+    robotTab.add("Master Fire", masterFire).withSize(3,1).withPosition(6,1).withWidget(BuiltInWidgets.kBooleanBox);
+    robotTab.add("Ready Fire", readyFire).withSize(1,1).withPosition(5,1).withWidget(BuiltInWidgets.kBooleanBox);
   }
 
   // Called once the command ends or is interrupted.

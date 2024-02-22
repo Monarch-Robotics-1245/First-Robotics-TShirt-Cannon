@@ -31,7 +31,8 @@ public final class Constants {
     public static final int LOAD_SIX = 12;
     public static final int MANAGER_FORWARD = 0;
     public static final int MANAGER_SIDE = 1;
-    public static final int PCM = 9;
+    public static final int COMP_PCM = 10;
+    public static final int CANNON_PCM = 9;
     public static final double DEADZONE = .05;
     public static final int CANNON_ID_ONE = 1;
     public static final int CANNON_ID_TWO = 2;
@@ -39,6 +40,18 @@ public final class Constants {
     public static final int CANNON_ID_FOUR = 4;
     public static final int CANNON_ID_FIVE = 5;
     public static final int CANNON_ID_SIX = 6;
+    public static final String PIN = "1245";
+    public static final double MODE_SPORT_SPEED = 1;
+    public static final double MODE_NORMAL_SPEED = .45;
+    public static final double MODE_GUEST_SPEED = .20;
+    public static final double MODE_ALLISON_SPEED = .30;
+    public static final double SPEED_REVERSE = -1;
+    public static final int CANNON_CHANNEL_ONE = 0;
+    public static final int CANNON_CHANNEL_TWO = 1;
+    public static final int CANNON_CHANNEL_THREE = 2;
+    public static final int CANNON_CHANNEL_FOUR = 3;
+    public static final int CANNON_CHANNEL_FIVE = 5;
+    public static final int CANNON_CHANNEL_SIX = 6;
     public static class OperatorConstants {
         public static final int DRIVER_CONTROLLER_PORT = 1;
         public static final int MANAGER_CONTROLLER_PORT = 0;
