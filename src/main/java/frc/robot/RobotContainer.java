@@ -23,12 +23,6 @@ import static java.lang.Math.abs;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private boolean cannonOne = false;
-  private boolean cannonTwo = false;
-  private boolean cannonThree = false;
-  private boolean cannonFour = false;
-  private boolean cannonFive = false;
-  private boolean cannonSix = false;
   private final DriveTrain driveTrainSubsystem = new DriveTrain();
 
 
@@ -66,17 +60,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
 //    configureBindings();
-    if (getManagerPressed(Constants.LOAD_ONE)) {cannonOne = !cannonOne;}
-    if (getManagerPressed(Constants.LOAD_TWO)) {cannonTwo = !cannonTwo;}
-    if (getManagerPressed(Constants.LOAD_THREE)) {cannonThree = !cannonThree;}
-    if (getManagerPressed(Constants.LOAD_FOUR)) {cannonFour = !cannonFour;}
-    if (getManagerPressed(Constants.LOAD_FIVE)) {cannonFive = !cannonFive;}
-    if (getManagerPressed(Constants.LOAD_SIX)) {cannonSix = !cannonSix;}
-
     TankDrive tankDriveCommand = new TankDrive(driveTrainSubsystem);
     driveTrainSubsystem.setDefaultCommand(tankDriveCommand);
     Cannon cannonSubsystem = new Cannon();
-    frc.robot.commands.Cannon cannonCommand = new frc.robot.commands.Cannon(cannonSubsystem, cannonOne, cannonTwo, cannonThree, cannonFour, cannonFive, cannonSix);
+    frc.robot.commands.Shoot cannonCommand = new frc.robot.commands.Shoot(cannonSubsystem);
     cannonSubsystem.setDefaultCommand(cannonCommand);
   }
 
