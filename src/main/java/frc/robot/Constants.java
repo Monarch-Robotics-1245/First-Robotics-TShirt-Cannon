@@ -22,14 +22,16 @@ public final class Constants {
     public static final int LEFT_STICK_Y = 1;
     public static final int RIGHT_STICK_Y = 5;
     public static final int READY_FIRE = 1;
+    public static final int OVERRIDE_FIRE = 3;
+    public static final int OVERRIDE_CONTROL = 2;
     public static final int LOAD_ONE = 7;
     public static final int LOAD_TWO = 9;
     public static final int LOAD_THREE = 11;
     public static final int LOAD_FOUR = 8;
     public static final int LOAD_FIVE = 10;
     public static final int LOAD_SIX = 12;
-    public static final int MANAGER_FORWARD = 0;
-    public static final int MANAGER_SIDE = 1;
+    public static final int OVERRIDE_FORWARD = 0;
+    public static final int OVERRIDE_SIDE = 1;
     public static final int CANNON_PCM = 9;
     public static final double DEADZONE = .05;
     public static final int CANNON_ID_ONE = 1;
@@ -38,11 +40,6 @@ public final class Constants {
     public static final int CANNON_ID_FOUR = 4;
     public static final int CANNON_ID_FIVE = 5;
     public static final int CANNON_ID_SIX = 6;
-    public static final String PIN = "1245";
-    public static final double MODE_SPORT_SPEED = 1;
-    public static final double MODE_NORMAL_SPEED = .45;
-    public static final double MODE_GUEST_SPEED = .20;
-    public static final double MODE_ALLISON_SPEED = .30;
     public static final double SPEED_REVERSE = -1;
     public static final int CANNON_CHANNEL_ONE = 0;
     public static final int CANNON_CHANNEL_TWO = 1;
@@ -50,10 +47,10 @@ public final class Constants {
     public static final int CANNON_CHANNEL_FOUR = 3;
     public static final int CANNON_CHANNEL_FIVE = 5;
     public static final int CANNON_CHANNEL_SIX = 6;
-    public static final double MIN_VOLTAGE = 11.75;
 
     public static class OperatorConstants {
-        public static final int DRIVER_CONTROLLER_PORT = 1;
         public static final int MANAGER_CONTROLLER_PORT = 0;
+        public static final int DRIVER_CONTROLLER_PORT = 1;
+        public static final int OVERRIDE_CONTROLLER_PORT = 2;
     }
 }

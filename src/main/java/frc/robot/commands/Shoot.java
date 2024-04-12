@@ -29,17 +29,7 @@ public class Shoot extends Command {
   @Override
   public void execute() {
     boolean masterFire = Robot.robotContainer.getManagerButton(Constants.READY_FIRE);
-    boolean readyFire;
-
-    PowerDistribution PDP = new PowerDistribution(0, ModuleType.kCTRE);
-
-    double voltage = PDP.getVoltage();
-
-    if (voltage < Constants.MIN_VOLTAGE) {
-      readyFire = true;
-    } else {
-      readyFire = false;
-    }
+    boolean overrideFire = Robot.robotContainer.getOverrideButton(Constants.OVERRIDE_FIRE)
 
     boolean CANNON_ONE_COMMAND = Robot.robotContainer.getManagerButton(Constants.LOAD_ONE);
     boolean CANNON_TWO_COMMAND = Robot.robotContainer.getManagerButton(Constants.LOAD_TWO);
@@ -48,14 +38,7 @@ public class Shoot extends Command {
     boolean CANNON_FIVE_COMMAND = Robot.robotContainer.getManagerButton(Constants.LOAD_FIVE);
     boolean CANNON_SIX_COMMAND = Robot.robotContainer.getManagerButton(Constants.LOAD_SIX);
 
-    SmartDashboard.putBoolean("Cannon 1", CANNON_ONE_COMMAND);
-    SmartDashboard.putBoolean("Cannon 2", CANNON_TWO_COMMAND);
-    SmartDashboard.putBoolean("Cannon 3", CANNON_THREE_COMMAND);
-    SmartDashboard.putBoolean("Cannon 4", CANNON_FOUR_COMMAND);
-    SmartDashboard.putBoolean("Cannon 5", CANNON_FIVE_COMMAND);
-    SmartDashboard.putBoolean("Cannon 6", CANNON_SIX_COMMAND);
-
-    if (masterFire && readyFire) {
+    if (masterFire && overrideFire) {
       cannon.activateCannon(CANNON_ONE_COMMAND, Constants.CANNON_ID_ONE);
       cannon.activateCannon(CANNON_TWO_COMMAND, Constants.CANNON_ID_TWO);
       cannon.activateCannon(CANNON_THREE_COMMAND, Constants.CANNON_ID_THREE);
@@ -65,9 +48,6 @@ public class Shoot extends Command {
     } else {
       cannon.disarmCannons();
     }
-
-    SmartDashboard.putBoolean("Master Fire", masterFire);
-    SmartDashboard.putBoolean("Ready Fire", readyFire);
   }
 
   // Called once the command ends or is interrupted.

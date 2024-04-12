@@ -4,11 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -33,31 +28,23 @@ public class TankDrive extends Command {
   public void execute() {
     double speedMultiplier = Constants.MODE_NORMAL_SPEED;
 
-    boolean OVERRIDE_ACTIVE;
-    boolean DriverInControl;
 
     double leftStickY = Robot.robotContainer.getDriverRawAxis(Constants.LEFT_STICK_Y);
     double rightStickY = Robot.robotContainer.getDriverRawAxis(Constants.RIGHT_STICK_Y);
 
-    double forwardVal = Robot.robotContainer.getManagerRawAxis(Constants.MANAGER_FORWARD);
-    double sideVal = Robot.robotContainer.getManagerRawAxis(Constants.MANAGER_SIDE);
+    double forwardVal = Robot.robotContainer.getOverrideRawAxis(Constants.OVERRIDE_FORWARD);
+    double sideVal = Robot.robotContainer.getOverrideRawAxis(Constants.OVERRIDE_SIDE);
 
     double leftCommandManager = forwardVal + sideVal;
     double rightCommandManager = forwardVal - sideVal;
 
-    if (Robot.robotContainer.getManagerButton(2)) {
+    if (Robot.robotContainer.getOverrideButton(Constants.OVERRIDE_CONTROL)) {
       driveTrain.setLeftMotors(leftCommandManager);
       driveTrain.setRightMotors(-rightCommandManager);
-      OVERRIDE_ACTIVE = true;
-      DriverInControl = false;
     } else {
       driveTrain.setLeftMotors(leftStickY*speedMultiplier*Constants.SPEED_REVERSE);
       driveTrain.setRightMotors(rightStickY*speedMultiplier*Constants.SPEED_REVERSE);
-      DriverInControl = true;
-      OVERRIDE_ACTIVE = false;
     }
-    SmartDashboard.putBoolean("Driver In Control", DriverInControl);
-    SmartDashboard.putBoolean("CONTROL OVERRIDE", OVERRIDE_ACTIVE);
   }
 
   // Called once the command ends or is interrupted.

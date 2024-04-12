@@ -33,6 +33,9 @@ public class RobotContainer {
   private final CommandGenericHID managerController =
           new CommandGenericHID(OperatorConstants.MANAGER_CONTROLLER_PORT);
 
+  private final CommandGenericHID overrideController =
+          new CommandGenericHID(OperatorConstants.OVERRIDE_CONTROLLER_PORT);
+
   public double getDriverRawAxis(int axis) {
     if (abs(driverController.getRawAxis(axis)) < Constants.DEADZONE) {
 		return 0;
@@ -54,6 +57,18 @@ public class RobotContainer {
     return managerController.getHID().getRawButton(button);
   }
   public boolean getManagerPressed(int button) { return managerController.getHID().getRawButtonPressed(button);}
+
+  public double getOverrideRawAxis(int axis) {
+    if (abs(overrideController.getRawAxis(axis)) < Constants.DEADZONE) {
+		return 0;
+    } else {
+		return overrideController.getRawAxis(axis);
+    }
+  }
+  public boolean getOverrideButton(int button) {
+    return overrideController.getHID().getRawButton(button);
+  }
+  public boolean getOverridePressed(int button) { return overrideController.getHID().getRawButtonPressed(button);}
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
